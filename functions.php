@@ -488,45 +488,42 @@ function save_booking_data_to_order(
 	}
 }
 
+function custom_wp_search_by_title_only($query)
+{
+	// Kiểm tra xem có đang ở trang tìm kiếm chính thống của WordPress và không phải trong trang quản trị (admin)
+	if (! is_admin() && $query->is_main_query() && $query->is_search()) {
 
+		// 1. Chỉ định chỉ tìm với post_type là 'post' (loại bỏ trang, sản phẩm, v.v.)
+		$query->set('post_type', 'post');
 
+		// 2. Can thiệp vào phần xử lý từ khóa tìm kiếm để chỉ tìm theo tiêu đề (title)
+		add_filter('posts_search', 'custom_search_where_title_only', 10, 2);
+	}
+}
+add_action('pre_get_posts', 'custom_wp_search_by_title_only');
 
+/**
+ * Hàm bổ trợ để giới hạn câu lệnh SQL WHERE chỉ tìm theo post_title
+ */
+function custom_search_where_title_only($search, $query)
+{
+	global $wpdb;
 
+	// Lấy từ khóa tìm kiếm từ truy vấn
+	$search_term = $query->get('s');
 
+	if (empty($search_term)) {
+		return $search;
+	}
 
-// $cart = [
-//   [
-// 	["data"] => [
-//        "product_name" => "VietNam Tour",
-//        "price"        => 4599,
-//        "quantity"     => 1
-//     ],
-//     ["guest_count"] => 6,
-//     ["departure_date"] => "27/09/2026"	
-//   ],
-//   [
-// 	["data"] => [
-//        "product_name" => "VietNam Tour",
-//        "price"        => 4599,
-//        "quantity"     => 1
-//     ],
-//     ["guest_count"] => 6,
-//     ["departure_date"] => "27/09/2026"
-//   ],
-//   [
-// 	["data"] => [
-//        "product_name" => "VietNam Tour",
-//        "price"        => 4599,
-//        "quantity"     => 1
-//     ],
-//     ["guest_count"] => 6,
-//     ["departure_date"] => "27/09/2026"
-//   ],
-//   "total" => "10056",
-//   "amout" => 3
+	// Xóa bộ lọc ngay sau khi chạy để tránh ảnh hưởng đến các truy vấn khác trên trang
+	remove_filter('posts_search', 'custom_search_where_title_only', 10);
 
+	// Tách các từ khóa nếu người dùng tìm kiếm nhiều từ (ví dụ: "lập trình wordpress")
+	$like = '%' . $wpdb->esc_like($search_term) . '%';
 
-// ];
+	// Tạo câu lệnh SQL mới chỉ quét qua trường post_title và trạng thái là publish
+	$search = $wpdb->prepare(" AND {$wpdb->posts}.post_title LIKE %s AND {$wpdb->posts}.post_status = 'publish' ", $like);
 
-
-
+	return $search;
+}
