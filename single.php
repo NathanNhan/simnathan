@@ -125,7 +125,7 @@ get_header();
 						<!-- widget-search-close -->
 						<!-- widget-categories-start -->
 						<div class=" widget widget-categories">
-							<h2 class="widget-title">Categories</h2>
+							<h2 class="widget-title">Chuyên Mục</h2>
 							<ul class="list-none">
 								<?php
 								$categories = get_categories();
@@ -139,7 +139,7 @@ get_header();
 						<!-- widget-categories-close -->
 						<!-- widget-recent-post-start -->
 						<div class=" widget widget-recent-post">
-							<h2 class="widget-title">Recent Post</h2>
+							<h2 class="widget-title">Bài viết gần đây</h2>
 							<ul class="list-none">
 								<?php
 								$recent_posts = get_posts(
