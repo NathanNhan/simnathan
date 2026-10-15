@@ -17,7 +17,7 @@
                     <!-- footer-links -->
                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 ">
                         <div class="footer-widget ">
-                            <h3 class="footer-title ">Quick Links</h3>
+                            <h3 class="footer-title ">Liên kết nhanh</h3>
                             <?php
                             wp_nav_menu(
                                 array(
@@ -33,7 +33,7 @@
                     <!-- footer-tours -->
                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 ">
                         <div class="footer-widget ">
-                            <h3 class="footer-title ">Tip Travels</h3>
+                            <h3 class="footer-title ">Cẩm nang du lịch</h3>
                             <?php
                             wp_nav_menu(
                                 array(
@@ -49,7 +49,7 @@
                     <!-- footer-post -->
                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 ">
                         <div class="footer-widget">
-                            <h3 class="footer-title">Contact Info</h3>
+                            <h3 class="footer-title">Thông tin liên hệ</h3>
                             <!-- <div class="ft-contact-info"> <span class="ft-contact-icon"><i class="fa fa-map-marker"></i></span> <span class="ft-contact-text"><?= !empty($footer_tab__location) ? esc_html($footer_tab__location) : '' ?></span></div> -->
                             <div class="ft-contact-info"> <span class="ft-contact-icon"><i class="fa fa-phone "></i></span> <span class="ft-contact-text"><?= !empty($footer_tab__phone) ? esc_html($footer_tab__phone) : '' ?></span></div>
                             <div class="ft-contact-info"> <span class="ft-contact-icon"><i class="fa fa-envelope "></i></span> <span class="ft-contact-text"><?= !empty($footer_tab__email) ? esc_html($footer_tab__email) : '' ?></span></div>
