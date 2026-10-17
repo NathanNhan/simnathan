@@ -104,3 +104,12 @@ dl.variation {
 	width: 300px !important;
 
 }
+
+.post-pageheader:before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #333;
+    opacity: 0.5;
+}
