@@ -108,7 +108,7 @@ dl.variation {
 .post-pageheader:before {
     content: '';
     position: absolute;
-    height: 100%;
+    height: 95%;
     width: 100%;
     background-color: #333;
     opacity: 0.5;
