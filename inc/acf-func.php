@@ -52,13 +52,6 @@ if (function_exists('acf_add_local_field_group')):
                 'type' => 'repeater',
                 'sub_fields' => array(
                     array(
-                        'key' => 'about_team_item_image',
-                        'label' => 'Team Item Image',
-                        'name' => 'about_team_item_image',
-                        'type' => 'image',
-                        'return_format' => 'url',
-                    ),
-                    array(
                         'key' => 'about_team_item_name',
                         'label' => 'Team Item Name',
                         'name' => 'about_team_item_name',
