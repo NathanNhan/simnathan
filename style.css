@@ -105,11 +105,21 @@ dl.variation {
 
 }
 
-.post-pageheader:before {
-    content: '';
-    position: absolute;
-    height: 95%;
-    width: 100%;
-    background-color: #333;
-    opacity: 0.5;
+.post-pageheader {
+	position: relative;
+	isolation: isolate;
+}
+
+.post-pageheader::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-color: #333;
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.post-pageheader > .container {
+	position: relative;
+	z-index: 1;
 }
