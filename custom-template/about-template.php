@@ -19,7 +19,7 @@ $about_team_description = get_field('about_team_description');
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-caption">
-                    <h1 class="page-title">About Us</h1>
+                    <h1 class="page-title"><?php the_title() ?></h1>
                 </div>
             </div>
         </div>
@@ -112,15 +112,7 @@ $about_team_description = get_field('about_team_description');
                 ?>
                     <!-- team-member -->
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12 col-12">
-                        <div class="team-block">
-                            <?php if ($team_image_url): ?>
-                            <div class="team-img">
-                                <a href="#" class="imghover">
-                                    <img src="<?php echo esc_url($team_image_url); ?>" alt="<?php echo esc_attr($team_name); ?>" class="img-fluid">
-                                </a>
-                            </div>
-                            <?php endif; ?>
-
+                        <div class="team-block">    
                             <div class="team-content">
                                 <?php if ($team_name): ?>
                                     <h4 class="team-title"><?php echo esc_html($team_name); ?></h4>
