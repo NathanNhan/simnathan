@@ -26,7 +26,6 @@ $about_team_description = get_field('about_team_description');
     </div>
 </div>
 <!-- /.page-header-->
-
 <!-- about -->
 <div class="content">
     <div class="container">
@@ -131,7 +130,5 @@ $about_team_description = get_field('about_team_description');
     </div>
 </div>
 <!-- /.team-section -->
-
 <?php get_footer(); ?>
 
-```S
