@@ -114,9 +114,9 @@ function travelme_setup()
 			'flex-height' => true,
 		)
 	);
+	require_once get_template_directory() . '/inc/acf-func.php';
 }
 add_action('after_setup_theme', 'travelme_setup');
-
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
