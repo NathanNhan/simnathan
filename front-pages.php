@@ -1,4 +1,5 @@
 <?php
+/** eSIM destination page used for the site's static front page. */
 get_header();
 
 $esim_products = function_exists('wc_get_products')
