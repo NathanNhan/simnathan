@@ -192,7 +192,7 @@ function travelme_scripts()
 	wp_enqueue_script('travelme-jquery-ui', get_template_directory_uri() . '/assets/js/jquery-ui.js', array('travelme-jquery'), _S_VERSION, true);
 	wp_enqueue_script('travelme-date', get_template_directory_uri() . '/assets/js/date.js', array('travelme-jquery'), _S_VERSION, true);
 	wp_enqueue_script('travelme-return-to-top', get_template_directory_uri() . '/assets/js/return-to-top.js', array('travelme-jquery'), _S_VERSION, true);
-	wp_enqueue_script('travelme-popup-gallery', get_template_directory_uri() . '/assets/js/popup-gallery.js', array('travelme-jquery'), _S_VERSION, true);
+	wp_enqueue_script('travelme-popup-gallery', get_template_directory_uri() . '/assets/js/popup-gallery.js', array('travelme-jquery', 'travelme-magnific'), _S_VERSION, true);
 	wp_enqueue_script('travelme-magnific', get_template_directory_uri() . '/assets/js/jquery.magnific-popup.min.js', array('travelme-jquery'), _S_VERSION, true);
 	wp_enqueue_script('travelme-owl-thumb', get_template_directory_uri() . '/assets/js/owl.carousel2.thumbs.min.js', array('travelme-jquery'), _S_VERSION, true);
 	wp_enqueue_script('travelme-thumb', get_template_directory_uri() . '/assets/js/thumb.js', array('travelme-jquery', 'travelme-owl-thumb'), _S_VERSION, true);
