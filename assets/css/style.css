@@ -2442,6 +2442,16 @@ img {
 /*-------------------------
 10.2 Tour Single
 ---------------------------*/
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 .tour-pageheader {
   background: url(../images/tour_pageheader.jpg) no-repeat;
   background-position: top center;
