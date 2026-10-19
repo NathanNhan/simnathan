@@ -13,18 +13,19 @@
         $single_tour__map        = get_field("tour_map", get_the_ID());
         $single_tour__consultant = get_field("tour_consultant", get_the_ID());
         $single_tour__duration   = get_field("tour_duration", get_the_ID());
+        $single_tour__departure_dates = get_field("department_date", get_the_ID());
         ?>
 
         <!-- page-header -->
-        <div class="tour-pageheader">
+        <div class="tour-pageheader" <?php if (has_post_thumbnail()) : ?> style="background-image: url('<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'full')); ?>');" <?php endif; ?>>
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="tour-caption">
                             <h1 class="text-white tour-title"><?php the_title(); ?></h1>
                             <p class="tour-caption-text text-white"><strong class="tour-rate">$<?= $single_tour__price; ?></strong>( <?= $single_tour__duration; ?> )</p>
-                            <a href="#booking_tour" class="btn btn-primary mb10">Book Your Tour</a>
-                            <a href="#contact-map" class="btn btn-white mb10">view map</a>
+                            <a href="#booking_tour" class="btn btn-primary mb10">Đặt tour</a>
+                            <a href="#contact-map" class="btn btn-white mb10">Xem bản đồ</a>
                         </div>
                     </div>
                 </div>
@@ -35,7 +36,7 @@
                 <div class="row">
                     <div class="col-xl-8 col-lg-8 col-md-7 col-sm-12 col-12">
                         <div class="highlights-section mb60">
-                            <h3>Highlights</h3>
+                            <h3>Nổi bật</h3>
                             <?php if (!empty($single_tour__hightlight)) : ?>
                                 <?= $single_tour__hightlight; ?>
                             <?php endif; ?>
@@ -62,7 +63,7 @@
                             </div>
                         </div>
                         <div class="journey-section mb60">
-                            <h3 class="mb30">Journey</h3>
+                            <h3 class="mb30">Hành trình chi tiết</h3>
                             <?php if (!is_null($single_tour__journey)) : ?>
                                 <?php foreach ($single_tour__journey as $journey) : ?>
                                     <?= $journey["journey_content"]; ?>
@@ -71,7 +72,7 @@
 
                         </div>
                         <div class="included-section mb60">
-                            <h3 class="mb30">What's Included</h3>
+                            <h3 class="mb30">Dịch vụ bao gồm</h3>
                             <div class="row">
                                 <?php if (!empty($single_tour__included)) : ?>
                                     <?= $single_tour__included; ?>
@@ -79,7 +80,7 @@
                             </div>
                         </div>
                         <div class="reviews-section mb60">
-                            <h3 class="mb40">Customer Reviews</h3>
+                            <h3 class="mb40">Đánh giá của khách hàng</h3>
                             <?php
                             $review_comments = get_comments(
                                 array(
@@ -107,27 +108,27 @@
                                                 </div>
                                             <?php endif; ?>
                                             <p><?= $comment->comment_content; ?></p>
-                                            <?php if(!$comment->comment_parent) :  ?>
-                                            <div class="">
-                                                <a href="<?php echo esc_url(get_permalink()) ?>?replytocom=<?php echo $comment->comment_ID; ?>#respond" class="btn-link mb30">Reply <i class="fa fa-angle-right"></i></a>
-                                            </div>
+                                            <?php if (!$comment->comment_parent) :  ?>
+                                                <div class="">
+                                                    <a href="<?php echo esc_url(get_permalink()) ?>?replytocom=<?php echo $comment->comment_ID; ?>#respond" class="btn-link mb30">Reply <i class="fa fa-angle-right"></i></a>
+                                                </div>
                                             <?php endif; ?>
                                         </div>
                                     </div>
 
 
-                                    
+
                                 <?php endforeach; ?>
 
                             <?php endif; ?>
 
                             <div class="leave-comments mt40">
-                                <h4 class="leave-comments-title">Leave a Review</h4>
+                                <h4 class="leave-comments-title">Để lại đánh giá</h4>
                                 <!-- Bước 3: Gọi đến file wp-comments-post.php để cập nhật comment xuống database -->
                                 <form id="respond" class="review-form" action="<?php echo esc_url(site_url('/wp-comments-post.php')); ?>" method="post">
 
                                     <div class="form-group">
-                                        <label for="review-full-name">Full Name</label>
+                                        <label for="review-full-name">Họ và tên</label>
                                         <input type="text" id="review-full-name" name="author" class="form-control" required>
                                     </div>
                                     <div class="form-group">
@@ -135,9 +136,9 @@
                                         <input type="email" id="review-email" name="email" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="review-star">Review Star</label>
+                                        <label for="review-star">Đánh giá</label>
                                         <select id="review-star" name="rating" class="form-control" required>
-                                            <option value="">Choose a rating</option>
+                                            <option value="">Chọn mức độ</option>
                                             <option value="5">5 stars</option>
                                             <option value="4">4 stars</option>
                                             <option value="3">3 stars</option>
@@ -157,19 +158,11 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="video-section">
-                            <h3 class="mb30">Video</h3>
-                            <div class="video-block">
-                                <div class="video-img">
-                                    <?= $single_tour__video; ?>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12">
                         <div class="widget-primary support-list">
                             <div class="widget-primary-title">
-                                <h3>Why Book With Us?</h3>
+                                <h3>Tại sao nên đặt tour với chúng tôi?</h3>
                             </div>
                             <?php if (!empty($single_tour__consultant)) : ?>
                                 <?= $single_tour__consultant ?>
@@ -178,13 +171,71 @@
                         <!-- enguiry-form -->
                         <!-- form -->
                         <div class="widget-form" id="booking_tour">
-                            <h3 class="text-white mb30"> Book Your Tour</h3>
+                            <h3 class="text-white mb30"> Đặt tour của bạn</h3>
+                            <?php if (!empty($single_tour__departure_dates) && is_array($single_tour__departure_dates)) : ?>
+                                <div class="tour-departure-dates">
+                                    <h4 class="tour-departure-dates-title">Ngày khởi hành</h4>
+                                    <ul class="tour-departure-dates-list">
+                                        <?php foreach ($single_tour__departure_dates as $departure_date_row) : ?>
+                                            <?php
+                                            $departure_date_value = isset($departure_date_row['date']) ? trim((string) $departure_date_row['date']) : '';
+                                            if ($departure_date_value === '') {
+                                                continue;
+                                            }
+
+                                            $departure_date_object = DateTimeImmutable::createFromFormat('!Ymd', $departure_date_value);
+                                            if (!$departure_date_object) {
+                                                $departure_date_object = DateTimeImmutable::createFromFormat('!d/m/Y', $departure_date_value);
+                                            }
+                                            if (!$departure_date_object) {
+                                                $departure_date_object = DateTimeImmutable::createFromFormat('!Y-m-d', $departure_date_value);
+                                            }
+                                            $departure_date_label = $departure_date_object
+                                                ? $departure_date_object->format('d/m/Y')
+                                                : $departure_date_value;
+                                            ?>
+                                            <li class="tour-departure-date">
+                                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                <span><?php echo esc_html($departure_date_label); ?></span>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
                             <form id="tour-booking-form">
                                 <div class="row">
-                                    <?php
-                                    $product_id = get_field('tour_product');
-
-                                    ?>
+                                    <input type="hidden" name="tour_title" value="<?php the_title(); ?>">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label class="control-label sr-only" for="datepicker"></label>
+                                                <div class="input-group">
+                                                    <input id="fullname" name="fullname" type="text" placeholder="Họ Tên" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label class="control-label sr-only" for="datepicker"></label>
+                                                <div class="input-group">
+                                                    <input id="phone" name="phone" type="text" placeholder="Số điện thoại" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label class="control-label sr-only" for="datepicker"></label>
+                                                <div class="input-group">
+                                                    <input id="email" name="email" type="email" placeholder="Email" class="form-control" required>
+                                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="form-group">
                                             <div class="form-group">
@@ -201,7 +252,7 @@
                                             <label class="control-label sr-only" for="select"></label>
                                             <div class="select">
                                                 <select id="select" name="guest_count" class="form-control">
-                                                    <option value="">Number of Peoples</option>
+                                                    <option value="">Số lượng người</option>
                                                     <option value="6">6</option>
                                                     <option value="10">10</option>
                                                     <option value="25">25</option>
@@ -233,7 +284,7 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="section-title">
-                    <h2>Similar Packages</h2>
+                    <h2>Chuyến đi tương tự</h2>
                 </div>
             </div>
         </div>

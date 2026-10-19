@@ -1326,6 +1326,45 @@ button.btn {
   margin-bottom: 0px;
 }
 
+.tour-departure-dates {
+  margin-bottom: 25px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tour-departure-dates-title {
+  margin: 0 0 14px;
+  color: #fff;
+  font-size: 18px;
+}
+
+.tour-departure-dates-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tour-departure-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 4px;
+  background: #fff;
+  color: #3d0f82;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tour-departure-date .fa {
+  color: #d9a900;
+}
+
 .widget-map {
   border-radius: 8px;
 }
