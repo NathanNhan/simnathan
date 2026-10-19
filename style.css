@@ -110,7 +110,15 @@ dl.variation {
 	isolation: isolate;
 }
 
-.post-pageheader::before {
+.tour-pageheader {
+	position: relative;
+	isolation: isolate;
+	background-size: cover;
+}
+
+
+.post-pageheader::before,
+.tour-pageheader::before {
 	content: '';
 	position: absolute;
 	inset: 0;
@@ -119,7 +127,7 @@ dl.variation {
 	pointer-events: none;
 }
 
-.post-pageheader > .container {
+.post-pageheader>.container {
 	position: relative;
 	z-index: 1;
 }
