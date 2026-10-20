@@ -164,7 +164,7 @@ get_header();
 												</a>
 											</div>
 											<div class="recent-content">
-												<h5 class="recent-title"><a href="<?= esc_url(get_permalink($post->ID)); ?>" class="title"><?= esc_html(wp_trim_words(get_the_title($post->ID), 6, '')); ?></a></h5>
+												<h5 class="recent-title"><a href="<?= esc_url(get_permalink($post->ID)); ?>" class="title"><?= esc_html(wp_trim_words(get_the_title($post->ID), 6, '')); ?>...</a></h5>
 												<div class="meta">
 													<span class="meta-date"><?= get_the_date("d F Y", $post->ID); ?></span>
 												</div>
@@ -192,16 +192,7 @@ get_header();
 								</ul>
 							</div>
 							<!-- widget-archives-close -->
-							<!-- widget-Tag start -->
-							<div class=" widget widget-tags ">
-								<h2 class=" widget-title">Tags</h2>
-								<?php
-								$post_tags = get_tags();
-								foreach ($post_tags as $tag) :
-								?>
-									<a href="<?= get_tag_link($tag->term_id); ?>"><?= $tag->name; ?></a>
-								<?php endforeach; ?>
-							</div>
+							
 							<!-- widget-Tag close -->
 						<?php endif; ?>
 					</div>
