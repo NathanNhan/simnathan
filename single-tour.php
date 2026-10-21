@@ -198,7 +198,7 @@
                             <?php endif; ?>
 
                             <!-- HÀM GỌI CONTACT FORM 7 -->
-                            <?php echo do_shortcode('[contact-form-7 id="9207" title="Booking Form"]'); ?>
+                            <?php echo do_shortcode('[contact-form-7 id="4ef78d6" title="Booking Tour"]'); ?>
 
                         </div>
                         <!-- /.enguiry-form -->
