@@ -62,6 +62,34 @@ $(document).ready(function(){
         }
     });
 
+    var $tourDestinations = $('.tour-destinations-carousel');
+    if ($tourDestinations.length) {
+        $tourDestinations.owlCarousel({
+            loop: false,
+            margin: 24,
+            autoplay: false,
+            nav: $tourDestinations.children('.item').length > 1,
+            dots: false,
+            slideBy: 1,
+            smartSpeed: 500,
+            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            responsive: {
+                0: {
+                    items: 1
+                },
+                576: {
+                    items: 2
+                },
+                992: {
+                    items: 3
+                },
+                1200: {
+                    items: 4
+                }
+            }
+        });
+    }
+
  $('.owl-about-gallery').owlCarousel({
 
     loop:true,

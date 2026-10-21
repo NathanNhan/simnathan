@@ -1,6 +1,5 @@
 <?php
-/** eSIM destination page used for the site's static front page. */
-get_header();
+/** eSIM destination content included in the site's front-page template. */
 
 $esim_products = function_exists('wc_get_products')
     ? wc_get_products(
@@ -165,5 +164,3 @@ $esim_popular_count = 0;
         <p class="esim-empty" <?php echo $esim_cards_count ? 'hidden' : ''; ?>><?php esc_html_e('No destinations found. Try another search.', 'travelme'); ?></p>
     </div>
 </main>
-
-<?php get_footer(); ?>

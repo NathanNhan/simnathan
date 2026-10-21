@@ -164,7 +164,7 @@
                             <?php endif; ?>
                         </div>
                         <!-- enguiry-form -->
-                        <div class="widget-form" id="booking_tour">
+                        <div class="widget-form" id="booking_tour" style="height: 75%;">
                             <h3 class="text-white mb30"> Đặt tour của bạn</h3>
                             <?php if (!empty($single_tour__departure_dates) && is_array($single_tour__departure_dates)) : ?>
                                 <div class="tour-departure-dates">
