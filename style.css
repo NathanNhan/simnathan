@@ -131,3 +131,33 @@ dl.variation {
 	position: relative;
 	z-index: 1;
 }
+
+/* Đảm bảo khung input-group hiển thị dạng flex ngang */
+.input-group {
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+/* Ô input chiếm toàn bộ không gian còn lại */
+.input-group .form-control {
+	flex: 1 1 auto;
+	width: 1%;
+	margin-bottom: 0;
+}
+
+/* Định dạng phần nền và bo góc cho icon addon bên cạnh ô Email */
+.input-group .input-group-addon {
+	display: flex;
+	align-items: center;
+	padding: 6px 12px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1;
+	color: #555;
+	text-align: center;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	border-left: 0;
+	border-radius: 0 4px 4px 0;
+}
