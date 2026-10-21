@@ -527,3 +527,6 @@ function custom_search_where_title_only($search, $query)
 
 	return $search;
 }
+
+/* loại bỏ thẻ br*/
+add_filter('wpcf7_autop_or_not', '__return_false');
