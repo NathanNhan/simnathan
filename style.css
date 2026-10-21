@@ -132,6 +132,6 @@ dl.variation {
 	z-index: 1;
 }
 
-.input-group p {
+span.wpcf7-form-control-wrap {
 	width: 100%;
 }
