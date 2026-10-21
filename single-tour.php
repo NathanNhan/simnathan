@@ -250,17 +250,12 @@
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <div class="form-group">
                                             <label class="control-label sr-only" for="select"></label>
-                                            <div class="select">
-                                                <select id="select" name="guest_count" class="form-control">
-                                                    <option value="">Số lượng người</option>
-                                                    <option value="6">6</option>
-                                                    <option value="10">10</option>
-                                                    <option value="25">25</option>
-                                                </select>
+                                            <div class="input-group">
+                                                <input id="guests" name="guest" type="number" placeholder="Number of People" class="form-control" required>
+                                                <span class="input-group-addon"><i class="fa fa-people"></i></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="product_id" value="<?php echo esc_attr($product_id); ?>">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                         <button type="submit" name="singlebutton" class="btn btn-primary">Booking</button>
                                     </div>
