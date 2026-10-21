@@ -135,3 +135,7 @@ dl.variation {
 span.wpcf7-form-control-wrap {
 	width: 100%;
 }
+
+.wpcf7-response-output {
+	color: #FFFFFF;
+}
