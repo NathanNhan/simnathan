@@ -116,15 +116,12 @@
                                         </div>
                                     </div>
 
-
-
                                 <?php endforeach; ?>
 
                             <?php endif; ?>
 
                             <div class="leave-comments mt40">
                                 <h4 class="leave-comments-title">Để lại đánh giá</h4>
-                                <!-- Bước 3: Gọi đến file wp-comments-post.php để cập nhật comment xuống database -->
                                 <form id="respond" class="review-form" action="<?php echo esc_url(site_url('/wp-comments-post.php')); ?>" method="post">
 
                                     <div class="form-group">
@@ -151,9 +148,7 @@
                                         <textarea id="review-comment" name="comment" class="form-control" rows="5" required></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary" name="submit-form">Submit</button>
-                                    <!-- Bước 1: dùng hàm comment_id_fields() để tự tạo ID cho bình luận -->
                                     <?php comment_id_fields(); ?>
-                                    <!-- Bước 2: Dùng action hook comment_form để gán sự kiện comment cho bài viết cụ thể -->
                                     <?php do_action('comment_form', get_the_ID()); ?>
                                 </form>
                             </div>
@@ -169,7 +164,6 @@
                             <?php endif; ?>
                         </div>
                         <!-- enguiry-form -->
-                        <!-- form -->
                         <div class="widget-form" id="booking_tour">
                             <h3 class="text-white mb30"> Đặt tour của bạn</h3>
                             <?php if (!empty($single_tour__departure_dates) && is_array($single_tour__departure_dates)) : ?>
@@ -202,66 +196,10 @@
                                     </ul>
                                 </div>
                             <?php endif; ?>
-                            <form id="tour-booking-form">
-                                <div class="row">
-                                    <input type="hidden" name="tour_title" value="<?php the_title(); ?>">
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <div class="form-group">
-                                            <div class="form-group">
-                                                <label class="control-label sr-only" for="datepicker"></label>
-                                                <div class="input-group">
-                                                    <input id="fullname" name="fullname" type="text" placeholder="Họ Tên" class="form-control" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <div class="form-group">
-                                            <div class="form-group">
-                                                <label class="control-label sr-only" for="datepicker"></label>
-                                                <div class="input-group">
-                                                    <input id="phone" name="phone" type="text" placeholder="Số điện thoại" class="form-control" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <div class="form-group">
-                                            <div class="form-group">
-                                                <label class="control-label sr-only" for="datepicker"></label>
-                                                <div class="input-group">
-                                                    <input id="email" name="email" type="email" placeholder="Email" class="form-control" required>
-                                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <div class="form-group">
-                                            <div class="form-group">
-                                                <label class="control-label sr-only" for="datepicker"></label>
-                                                <div class="input-group">
-                                                    <input id="datepicker" name="departure_date" type="text" placeholder="Date" class="form-control" required>
-                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <div class="form-group">
-                                            <label class="control-label sr-only" for="select"></label>
-                                            <div class="input-group">
-                                                <input id="guests" name="guest" type="number" placeholder="Number of People" class="form-control" required>
-                                                <span class="input-group-addon"><i class="fa fa-people"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <button type="submit" name="singlebutton" class="btn btn-primary">Booking</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- /.form -->
+
+                            <!-- HÀM GỌI CONTACT FORM 7 -->
+                            <?php echo do_shortcode('[contact-form-7 id="9207" title="Booking Form"]'); ?>
+
                         </div>
                         <!-- /.enguiry-form -->
                         <div id="contact-map" class="widget-map">
@@ -284,17 +222,13 @@
             </div>
         </div>
         <div class="row">
-            <!-- destination-section -->
             <?php
             $current_tour_id = get_the_ID();
             $taxonomy_name   = 'tour-type';
             $terms  = get_the_terms($current_tour_id, $taxonomy_name);
-            // echo '<pre>';
-            // var_dump($terms);
-            // echo '</pre>';
+
             if (!is_null($terms) && !is_wp_error($terms)) {
                 $term_ids = wp_list_pluck($terms, 'term_id');
-                //Xây dựng câu truy vấn wordpress
                 $args = array(
                     'post_type' => 'tour',
                     'posts_per_page' => 3,
@@ -319,10 +253,7 @@
                     wp_reset_postdata();
                 }
             }
-
             ?>
-            <!-- /.destination-section -->
-
         </div>
     </div>
 </div>
