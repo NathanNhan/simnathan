@@ -17,6 +17,9 @@
         // Lấy tọa độ thời tiết
         $lat = get_field('tour_lat', get_the_ID());
         $lng = get_field('tour_lng', get_the_ID());
+        // Chuyển đổi sang số và kiểm tra tính hợp lệ
+        $lat = !empty($lat) ? floatval($lat) : '';
+        $lng = !empty($lng) ? floatval($lng) : '';
         ?>
 
         <!-- page-header -->
