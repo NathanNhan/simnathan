@@ -140,45 +140,8 @@ span.wpcf7-form-control-wrap {
 	color: #FFFFFF;
 }
 
-.tour-destinations-carousel .owl-stage {
-	display: flex;
-}
-
-.tour-destinations-carousel .owl-item,
-.tour-destinations-carousel .item,
-.tour-destinations-carousel .destination-block,
-.tour-destinations-carousel .desti-img {
-	height: 100%;
-}
-
-.tour-destinations-carousel .desti-img {
-	aspect-ratio: 4 / 5;
-	overflow: hidden;
-}
-
-.tour-destinations-carousel .desti-img > img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.tour-destinations-carousel .owl-nav {
-	margin-top: 20px;
-	text-align: center;
-}
-
-.tour-destinations-carousel .owl-nav button {
-	width: 40px;
-	height: 40px;
-	margin: 0 5px;
-	border: 1px solid #3d0f82 !important;
-	border-radius: 50%;
-	color: #3d0f82 !important;
-	font-size: 22px !important;
-	line-height: 1 !important;
-}
-
-.tour-destinations-carousel .owl-nav button:hover {
-	background: #3d0f82 !important;
-	color: #fff !important;
+/* neo sidebar */
+div#booking_tour {
+	position: sticky;
+	top: 0px;
 }
