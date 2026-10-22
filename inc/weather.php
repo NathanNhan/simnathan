@@ -16,7 +16,7 @@ function get_tour_weather($lat, $lng)
         $weather_data = json_decode($body, true);
 
         // Lưu cache trong 2 giờ
-        set_transient($transient_key, $weather_data, 2 * HOUR_IN_SECONDS);
+        set_transient($transient_key, $weather_data, 7 * DAY_IN_SECONDS);
     }
 
     return $weather_data;
