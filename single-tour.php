@@ -14,6 +14,9 @@
         $single_tour__consultant = get_field("tour_consultant", get_the_ID());
         $single_tour__duration   = get_field("tour_duration", get_the_ID());
         $single_tour__departure_dates = get_field("department_date", get_the_ID());
+        // Lấy tọa độ thời tiết
+        $lat = get_field('tour_lat', get_the_ID());
+        $lng = get_field('tour_lng', get_the_ID());
         ?>
 
         <!-- page-header -->
@@ -155,6 +158,48 @@
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12">
+                        <!-- WIDGET THỜI TIẾT TẠI ĐIỂM ĐẾN -->
+                        <?php if ($lat && $lng) :
+                            $weather = get_tour_weather($lat, $lng);
+
+                            if ($weather && isset($weather['daily'])) :
+                        ?>
+                                <div class="widget-weather mb-4" style="background: #ffffff; border: 1px solid #e1e8ed; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                                    <h4 style="font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #2c3e50; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px;">
+                                        <i class="fa fa-cloud-sun" style="color: #f39c12; margin-right: 8px;"></i> Thời tiết điểm đến
+                                    </h4>
+                                    <div class="weather-sidebar-list" style="display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; padding-right: 4px;">
+                                        <?php
+                                        for ($i = 0; $i < count($weather['daily']['time']); $i++) {
+                                            $date     = $weather['daily']['time'][$i];
+                                            $max_temp = $weather['daily']['temperature_2m_max'][$i];
+                                            $min_temp = $weather['daily']['temperature_2m_min'][$i];
+                                            $code     = $weather['daily']['weathercode'][$i];
+                                            $info     = get_weather_info($code);
+
+                                            // Highlight ngày đầu tiên (Hôm nay)
+                                            $is_today = ($i === 0);
+                                            $item_bg = $is_today ? '#f0f7ff' : '#fcfcfc';
+                                            $item_border = $is_today ? '#bce8f1' : '#eee';
+                                        ?>
+                                            <div class="weather-item-row" style="display: flex; align-items: center; justify-content: space-between; background: <?= $item_bg; ?>; border: 1px solid <?= $item_border; ?>; padding: 8px 12px; border-radius: 6px;">
+                                                <div style="display: flex; align-items: center; gap: 10px;">
+                                                    <span style="font-size: 22px;"><?= $info['icon']; ?></span>
+                                                    <div>
+                                                        <strong style="display: block; font-size: 13px; color: #333;"><?= $is_today ? 'Hôm nay (' . date('d/m', strtotime($date)) . ')' : date('d/m/Y', strtotime($date)); ?></strong>
+                                                        <span style="font-size: 11px; color: #666;"><?= $info['text']; ?></span>
+                                                    </div>
+                                                </div>
+                                                <div style="text-align: right; font-size: 12px;">
+                                                    <span style="color: #d9534f; font-weight: bold;"><?= $max_temp; ?>°C</span>
+                                                    <span style="color: #888; margin-left: 4px;">/ <?= $min_temp; ?>°C</span>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                        <?php endif;
+                        endif; ?>
                         <div class="widget-primary support-list">
                             <div class="widget-primary-title">
                                 <h3>Tại sao nên đặt tour với chúng tôi?</h3>
