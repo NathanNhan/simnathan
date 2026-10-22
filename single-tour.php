@@ -159,7 +159,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-5 col-sm-12 col-12">
                         <!-- WIDGET THỜI TIẾT TẠI ĐIỂM ĐẾN -->
-                        <?php if ($lat && $lng) :
+                        <?php if (isset($lat) && isset($lng)) :
                             $weather = get_tour_weather($lat, $lng);
 
                             if ($weather && isset($weather['daily'])) :
