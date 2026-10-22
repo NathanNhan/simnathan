@@ -531,125 +531,6 @@ function custom_search_where_title_only($search, $query)
 /* loại bỏ thẻ br*/
 add_filter('wpcf7_autop_or_not', '__return_false');
 
-<<<<<<< HEAD
-function travelme_is_booking_contact_form($contact_form)
-{
-	return is_object($contact_form)
-		&& method_exists($contact_form, 'title')
-		&& 'Booking Tour' === $contact_form->title();
-}
-
-function travelme_get_published_tours()
-{
-	static $tours = null;
-
-	if (null === $tours) {
-		$tours = get_posts(
-			array(
-				'post_type'      => 'tour',
-				'post_status'    => 'publish',
-				'posts_per_page' => -1,
-				'orderby'        => 'date',
-				'order'          => 'DESC',
-				'no_found_rows'  => true,
-			)
-		);
-	}
-
-	return $tours;
-}
-
-function travelme_add_tour_selection_to_booking_form($form, $contact_form)
-{
-	if (!travelme_is_booking_contact_form($contact_form)) {
-		return $form;
-	}
-
-	if (is_admin() && (!function_exists('wp_doing_ajax') || !wp_doing_ajax())) {
-		return $form;
-	}
-
-	if (preg_match('/\[(?:select|select\*)\s+tour_selection(?:\s|\])/', $form)) {
-		return $form;
-	}
-
-	$tours = travelme_get_published_tours();
-	if (empty($tours)) {
-		return $form;
-	}
-
-	$form .= sprintf(
-		"\n\n<label>%1\$s\n[select* tour_selection include_blank]\n</label>",
-		esc_html__('Chọn tour', 'travelme')
-	);
-
-	return $form;
-}
-add_filter('wpcf7_contact_form_property_form', 'travelme_add_tour_selection_to_booking_form', 10, 2);
-
-function travelme_populate_booking_tour_options($tag)
-{
-	if (
-		!isset($tag['name'], $tag['basetype']) ||
-		'tour_selection' !== $tag['name'] ||
-		'select' !== $tag['basetype']
-	) {
-		return $tag;
-	}
-
-	$contact_form = class_exists('WPCF7_ContactForm')
-		? WPCF7_ContactForm::get_current()
-		: null;
-
-	if (!travelme_is_booking_contact_form($contact_form)) {
-		return $tag;
-	}
-
-	$tours = travelme_get_published_tours();
-
-	$tag['raw_values'] = array();
-	$tag['values']     = array();
-	$tag['labels']     = array();
-
-	$current_tour_id = get_queried_object_id();
-
-	foreach ($tours as $index => $tour) {
-		$tour_title = get_the_title($tour);
-		$tag['raw_values'][] = $tour_title;
-		$tag['values'][]     = $tour_title;
-		$tag['labels'][]     = $tour_title;
-
-		if ((int) $tour->ID === (int) $current_tour_id) {
-			$tag['options'][] = 'default:' . ($index + 1);
-		}
-	}
-
-	if (!in_array('include_blank', $tag['options'], true)) {
-		$tag['options'][] = 'include_blank';
-	}
-
-	return $tag;
-}
-add_filter('wpcf7_form_tag', 'travelme_populate_booking_tour_options');
-
-function travelme_add_tour_to_booking_email($mail, $contact_form)
-{
-	if (
-		!travelme_is_booking_contact_form($contact_form) ||
-		(is_admin() && (!function_exists('wp_doing_ajax') || !wp_doing_ajax())) ||
-		!is_array($mail) ||
-		!isset($mail['body']) ||
-		false !== strpos($mail['body'], '[tour_selection]')
-	) {
-		return $mail;
-	}
-
-	$mail['body'] .= "\n\n" . __('Tour selected:', 'travelme') . ' [tour_selection]';
-
-	return $mail;
-}
-add_filter('wpcf7_contact_form_property_mail', 'travelme_add_tour_to_booking_email', 10, 2);
-=======
 //load tour weather info
 require_once get_template_directory() . '/inc/weather.php';
 function get_weather_info($code)
@@ -696,4 +577,234 @@ function get_weather_info($code)
 			return ['text' => 'Bình thường', 'icon' => '🌡️'];
 	}
 }
->>>>>>> main
+
+function travelme_get_booking_tour_id()
+{
+	if (is_singular('tour')) {
+		return get_queried_object_id();
+	}
+
+	$unit_tag = isset($_POST['_wpcf7_unit_tag'])
+		? sanitize_text_field(wp_unslash($_POST['_wpcf7_unit_tag']))
+		: '';
+
+	if (preg_match('/-p([0-9]+)-/', $unit_tag, $matches)) {
+		$post_id = (int) $matches[1];
+		if ('tour' === get_post_type($post_id)) {
+			return $post_id;
+		}
+	}
+
+	return 0;
+}
+
+function travelme_is_tour_contact_form($contact_form)
+{
+	return is_object($contact_form)
+		&& method_exists($contact_form, 'title')
+		&& travelme_get_booking_tour_id()
+		&& 'Contact Form' === $contact_form->title();
+}
+
+function travelme_get_published_tours()
+{
+	static $tours = null;
+
+	if (null === $tours) {
+		$tours = get_posts(
+			array(
+				'post_type'      => 'tour',
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'orderby'        => 'date',
+				'order'          => 'DESC',
+				'no_found_rows'  => true,
+			)
+		);
+	}
+
+	return $tours;
+}
+
+function travelme_add_tour_selection_to_booking_form($form, $contact_form)
+{
+	if (travelme_is_tour_contact_form($contact_form)) {
+		$tour_id = travelme_get_booking_tour_id();
+		$departure_dates = get_field('department_date', $tour_id);
+		$departure_date_field = '';
+
+		if (!empty($departure_dates) && is_array($departure_dates)) {
+			$departure_date_field = '<div class="form-group"><label class="control-label">' .
+				esc_html__('Ngày khởi hành', 'travelme') . "\n" .
+				'[select* departure_date class:form-control include_blank]' .
+				'</label></div>';
+		}
+
+		return '<div class="form-group"><label class="control-label">' .
+			esc_html__('Họ tên', 'travelme') . "\n" .
+			'[text* your-name class:form-control placeholder "Họ tên"]' .
+			'</label></div>' .
+			'<div class="form-group"><label class="control-label">' .
+			esc_html__('Số điện thoại', 'travelme') . "\n" .
+			'[tel* your-phone class:form-control placeholder "Số điện thoại"]' .
+			'</label></div>' .
+			'<div class="form-group"><label class="control-label">' .
+			esc_html__('Email', 'travelme') . "\n" .
+			'[email* your-email class:form-control placeholder "Email"]' .
+			'</label></div>' .
+			$departure_date_field .
+			'<div class="form-group"><label class="control-label">' .
+			esc_html__('Số người', 'travelme') . "\n" .
+			'[number* number_of_people min:1 class:form-control placeholder "Số người"]' .
+			'</label></div>' .
+			'[hidden your-subject "Yêu cầu đặt tour"]' .
+			'[hidden your-message "Yêu cầu tư vấn đặt tour"]' .
+			'[submit class:btn class:btn-primary "Booking"]';
+	}
+
+	if (!travelme_is_booking_contact_form($contact_form)) {
+		return $form;
+	}
+
+	if (is_admin() && (!function_exists('wp_doing_ajax') || !wp_doing_ajax())) {
+		return $form;
+	}
+
+	if (preg_match('/\[(?:select|select\*)\s+tour_selection(?:\s|\])/', $form)) {
+		return $form;
+	}
+
+	$tours = travelme_get_published_tours();
+	if (empty($tours)) {
+		return $form;
+	}
+
+	$form .= sprintf(
+		"\n\n<label>%1\$s\n[select* tour_selection include_blank]\n</label>",
+		esc_html__('Chọn tour', 'travelme')
+	);
+
+	return $form;
+}
+add_filter('wpcf7_contact_form_property_form', 'travelme_add_tour_selection_to_booking_form', 10, 2);
+
+function travelme_populate_booking_tour_options($tag)
+{
+	if (!isset($tag['name'], $tag['basetype']) || 'select' !== $tag['basetype']) {
+		return $tag;
+	}
+
+	if ('departure_date' === $tag['name']) {
+		$contact_form = class_exists('WPCF7_ContactForm')
+			? WPCF7_ContactForm::get_current()
+			: null;
+
+		if (!travelme_is_tour_contact_form($contact_form)) {
+			return $tag;
+		}
+
+		$departure_dates = get_field('department_date', travelme_get_booking_tour_id());
+		if (empty($departure_dates) || !is_array($departure_dates)) {
+			return $tag;
+		}
+
+		$tag['raw_values'] = array();
+		$tag['values'] = array();
+		$tag['labels'] = array();
+
+		foreach ($departure_dates as $departure_date_row) {
+			$date_value = isset($departure_date_row['date'])
+				? trim((string) $departure_date_row['date'])
+				: '';
+			if ('' === $date_value) {
+				continue;
+			}
+
+			$date_object = DateTimeImmutable::createFromFormat('!Ymd', $date_value);
+			if (!$date_object) {
+				$date_object = DateTimeImmutable::createFromFormat('!d/m/Y', $date_value);
+			}
+			if (!$date_object) {
+				$date_object = DateTimeImmutable::createFromFormat('!Y-m-d', $date_value);
+			}
+
+			$tag['raw_values'][] = $date_value;
+			$tag['values'][] = $date_value;
+			$tag['labels'][] = $date_object ? $date_object->format('d/m/Y') : $date_value;
+		}
+
+		return $tag;
+	}
+
+	if ('tour_selection' !== $tag['name']) {
+		return $tag;
+	}
+
+	$contact_form = class_exists('WPCF7_ContactForm')
+		? WPCF7_ContactForm::get_current()
+		: null;
+
+	if (!travelme_is_booking_contact_form($contact_form)) {
+		return $tag;
+	}
+
+	$tours = travelme_get_published_tours();
+
+	$tag['raw_values'] = array();
+	$tag['values']     = array();
+	$tag['labels']     = array();
+
+	$current_tour_id = get_queried_object_id();
+
+	foreach ($tours as $index => $tour) {
+		$tour_title = get_the_title($tour);
+		$tag['raw_values'][] = $tour_title;
+		$tag['values'][]     = $tour_title;
+		$tag['labels'][]     = $tour_title;
+
+		if ((int) $tour->ID === (int) $current_tour_id) {
+			$tag['options'][] = 'default:' . ($index + 1);
+		}
+	}
+
+	if (!in_array('include_blank', $tag['options'], true)) {
+		$tag['options'][] = 'include_blank';
+	}
+
+	return $tag;
+}
+add_filter('wpcf7_form_tag', 'travelme_populate_booking_tour_options');
+
+function travelme_add_tour_to_booking_email($mail, $contact_form)
+{
+	if (
+		travelme_is_tour_contact_form($contact_form) &&
+		!is_admin() &&
+		is_array($mail) &&
+		isset($mail['body'])
+	) {
+		$tour_title = get_the_title(travelme_get_booking_tour_id());
+		$mail['subject'] = sprintf(__('Yêu cầu đặt tour: %s', 'travelme'), $tour_title);
+		$mail['body'] .= "\n\n" .
+			__('Tour:', 'travelme') . ' ' . $tour_title . "\n" .
+			__('Ngày khởi hành:', 'travelme') . ' [departure_date]' . "\n" .
+			__('Số người:', 'travelme') . ' [number_of_people]';
+
+		return $mail;
+	}
+
+	if (
+		!travelme_is_booking_contact_form($contact_form) ||
+		(is_admin() && (!function_exists('wp_doing_ajax') || !wp_doing_ajax())) ||
+		!is_array($mail) ||
+		!isset($mail['body']) ||
+		false !== strpos($mail['body'], '[tour_selection]')
+	) {
+		return $mail;
+	}
+
+	$mail['body'] .= "\n\n" . __('Tour selected:', 'travelme') . ' [tour_selection]';
+
+	return $mail;
+}
+add_filter('wpcf7_contact_form_property_mail', 'travelme_add_tour_to_booking_email', 10, 2);
