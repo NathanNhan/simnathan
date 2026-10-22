@@ -531,6 +531,7 @@ function custom_search_where_title_only($search, $query)
 /* loại bỏ thẻ br*/
 add_filter('wpcf7_autop_or_not', '__return_false');
 
+<<<<<<< HEAD
 function travelme_is_booking_contact_form($contact_form)
 {
 	return is_object($contact_form)
@@ -648,3 +649,51 @@ function travelme_add_tour_to_booking_email($mail, $contact_form)
 	return $mail;
 }
 add_filter('wpcf7_contact_form_property_mail', 'travelme_add_tour_to_booking_email', 10, 2);
+=======
+//load tour weather info
+require_once get_template_directory() . '/inc/weather.php';
+function get_weather_info($code)
+{
+	switch ($code) {
+		case 0:
+			return ['text' => 'Trời quang đãng', 'icon' => '☀️'];
+		case 1:
+		case 2:
+		case 3:
+			return ['text' => 'Có mây / Nhiều mây', 'icon' => '⛅'];
+		case 45:
+		case 48:
+			return ['text' => 'Có sương mù', 'icon' => '🌫️'];
+		case 51:
+		case 53:
+		case 55:
+		case 56:
+		case 57:
+			return ['text' => 'Mưa phùn nhẹ', 'icon' => '🌧️'];
+		case 61:
+		case 63:
+		case 65:
+		case 66:
+		case 67:
+			return ['text' => 'Có mưa', 'icon' => '🌧️'];
+		case 71:
+		case 73:
+		case 75:
+		case 77:
+			return ['text' => 'Có tuyết rơi', 'icon' => '❄️'];
+		case 80:
+		case 81:
+		case 82:
+			return ['text' => 'Mưa rào', 'icon' => '🌦️'];
+		case 85:
+		case 86:
+			return ['text' => 'Mưa tuyết', 'icon' => '🌨️'];
+		case 95:
+		case 96:
+		case 99:
+			return ['text' => 'Dông bão', 'icon' => '⚡'];
+		default:
+			return ['text' => 'Bình thường', 'icon' => '🌡️'];
+	}
+}
+>>>>>>> main
