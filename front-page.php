@@ -53,7 +53,7 @@ get_header();
                             <div class="form-group">
                                 <label class="control-label sr-only" for="select"></label>
                                 <div class="select">
-                                    <select id="select" name="tour_type" class="form-control">
+                                    <select id="select" name="country" class="form-control">
                                         <option value="">Bạn dự định đi đâu?</option>
                                         <option value="viet-nam">Việt Nam</option>
                                         <option value="trung-quoc">Trung Quốc</option>
