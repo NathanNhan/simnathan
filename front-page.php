@@ -49,43 +49,30 @@ get_header();
                 <!-- form -->
                 <form action="<?= get_post_type_archive_link('tour'); ?>" method="GET">
                     <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-3 col-12">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-3 col-12">
                             <div class="form-group">
                                 <label class="control-label sr-only" for="select"></label>
                                 <div class="select">
                                     <select id="select" name="tour_type" class="form-control">
-                                        <option value="">What type tour do you want to go</option>
-                                        <option value="adventure-tour">Adventure Tour</option>
-                                        <option value="domestic-tour">Domestic Tour</option>
-                                        <option value="international-tour">International Tour</option>
+                                        <option value="">Bạn dự định đi đâu?</option>
+                                        <option value="viet-nam">Việt Nam</option>
+                                        <option value="trung-quoc">Trung Quốc</option>
+
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-3 col-12">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-3 col-12">
                             <div class="form-group">
                                 <label class="control-label sr-only" for="datepicker"></label>
                                 <div class="input-group">
-                                    <input id="datepicker" name="datepicker" type="text" placeholder="Date" class="form-control" required>
+                                    <input id="datepicker" name="datepicker" type="text" placeholder="Ngày khởi hành" class="form-control" required>
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-3 col-12">
-                            <div class="form-group">
-                                <label class="control-label sr-only" for="select"></label>
-                                <div class="select">
-                                    <select id="select" name="guest_count" class="form-control">
-                                        <option value="">Number of Peoples</option>
-                                        <option value="6">6</option>
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                         <input type="hidden" name="post_type" value="tour">
-                        <div class="col-xl-3 col-lg-12 col-md-6 col-sm-3 col-12">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-3 col-12">
                             <button type="submit" class="btn btn-primary btn-lg">Enquiry Now</button>
                         </div>
                     </div>
