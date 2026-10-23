@@ -300,63 +300,32 @@ function show_comment_rating_column($column_name, $comment_id)
 function custom_tour_archive_query($query)
 {
 	if (! is_admin() && $query->is_main_query() && is_post_type_archive('tour')) {
-		$meta_query = array('ralation' => 'AND');
+		$meta_query = array('relation' => 'AND');
 		// 1. Lọc theo Thành phố
-		if (! empty($_GET['tour_type'])) {
+		if (! empty($_GET['country'])) {
 			$tax_query = array(
 				array(
-					'taxonomy' => 'tour-type',
+					'taxonomy' => 'country',
 					'field' => 'slug',
-					'terms' => sanitize_text_field($_GET['tour_type']),
+					'terms' => sanitize_text_field($_GET['country']),
 				),
 			);
 			$query->set('tax_query', $tax_query);
 		}
 
 		//2. Lọc the ngày
-		if (!empty($_GET['datepicker'])) {
+		if (isset($_GET['datepicker']) && is_string($_GET['datepicker']) && $_GET['datepicker'] !== '') {
 			$date_input = sanitize_text_field($_GET['datepicker']);
-			$formatted_date = date('Ymd', strtotime($date_input));
-			// echo "<pre>";
-			// var_dump($formatted_date);
-			// echo "</pre>";
-			// die;
-			$meta_query[] = array(
-				'key' => 'department_date',
-				'value' => $formatted_date,
-				'compare' => '=',
-				'type'  => 'DATE',
-			);
-			//output:
-			/* 
-				meta_query = [
-				   [0] => ['ralation' => 'AND']
-				   [1] => [
-				     'key' => 'department_date',
-					 'value' => $formatted_date, 
-					 'compare' => '=',
-					 'type'  => 'DATE',
-				   ],
-				   [2] => [
-					'key' => 'tour_number',
-					'value' => $formatted_number,
+			$date_timestamp = strtotime($date_input);
+			if ($date_timestamp !== false) {
+				$meta_query[] = array(
+					'key' => 'department_date_',
+					'compare_key' => 'LIKE',
+					'value' => date('Ymd', $date_timestamp),
 					'compare' => '=',
-					'type' => 'NUMERIC',
-				   ]
-				]
-			*/
+				);
+			}
 		}
-		//3. Lọc theo số hành khách
-		if (!empty($_GET['guest_count'])) {
-			$formatted_number = intval($_GET['guest_count']);
-			$meta_query[] = array(
-				'key' => 'tour_number',
-				'value' => $formatted_number,
-				'compare' => '=',
-				'type' => 'NUMERIC',
-			);
-		}
-
 		//Cập nhật lại meta_query cho Query chính của wordpress
 		$query->set('meta_query', $meta_query);
 	}
