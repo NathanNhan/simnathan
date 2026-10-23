@@ -103,7 +103,7 @@ get_header();
         // Lấy các terms từ taxonomy tour-type
         $tour_terms = get_terms(array(
             'taxonomy' => 'tour-type',
-            'hide_empty' => true,
+            'hide_empty' => false,
         ));
 
         if (!empty($tour_terms) && !is_wp_error($tour_terms)) :
