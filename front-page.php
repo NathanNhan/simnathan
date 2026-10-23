@@ -165,7 +165,7 @@ get_header();
             <!-- section-title -->
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
                 <div class="section-title">
-                    <h2>Top Destinations</h2>
+                    <h2>Điểm đến nổi bật</h2>
                 </div>
             </div>
             <!-- /.section-title -->
