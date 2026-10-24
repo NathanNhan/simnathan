@@ -77,6 +77,37 @@
                             <?php endif; ?>
 
                         </div>
+                        <div class="table-responsive">
+                            <div style="text-align: right; color: #cc0000; font-weight: bold; font-size: 14px; margin-bottom: 5px;">
+                                DU LỊCH CÙNG HELLO CHINA
+                            </div>
+                            <table class="table table-bordered text-center" style="border: 1px solid #4a90e2; vertical-align: middle;">
+                                <thead style="background-color: #5c93d8; color: #ffffff;">
+                                    <tr>
+                                        <th style="width: 40%; vertical-align: middle; border: 1px solid #ffffff;">NGÀY KHỞI HÀNH</th>
+                                        <th style="width: 25%; vertical-align: middle; border: 1px solid #ffffff;">NGƯỜI LỚN</th>
+                                        <th style="width: 35%; vertical-align: middle; border: 1px solid #ffffff;">TRẺ EM<br><span style="font-size: 12px; font-weight: normal;">02 ĐẾN DƯỚI 10 TUỔI</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $table_price = get_field('table_price');
+                                    if (!is_null($table_price)) :
+                                        foreach ($table_price as $row) :
+                                    ?>
+                                            <tr style="background-color: #ffb703; color: #000000; font-weight: bold;">
+                                                <td style="text-align: left; vertical-align: middle; border: 1px solid #ffffff; padding-left: 15px;"><?= $row['departure_date_table']; ?></td>
+                                                <td style="vertical-align: middle; border: 1px solid #ffffff;"><?= $row['adult_price']; ?></td>
+                                                <td style="vertical-align: middle; border: 1px solid #ffffff;"><?= $row['child_price']; ?></td>
+                                            </tr>
+                                    <?php endforeach;
+                                    endif;
+
+                                    ?>
+
+                                </tbody>
+                            </table>
+                        </div>
                         <div class="included-section mb60">
                             <h3 class="mb30">Dịch vụ bao gồm</h3>
                             <div class="row">
