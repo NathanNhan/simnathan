@@ -77,6 +77,57 @@
                             <?php endif; ?>
 
                         </div>
+                        <div class="table-responsive">
+                            <div style="text-align: right; color: #cc0000; font-weight: bold; font-size: 14px; margin-bottom: 5px;">
+                                DU LỊCH CÙNG HELLO CHINA
+                            </div>
+                            <table class="table table-bordered text-center" style="border: 1px solid #4a90e2; vertical-align: middle;">
+                                <thead style="background-color: #5c93d8; color: #ffffff;">
+                                    <tr>
+                                        <th style="width: 40%; vertical-align: middle; border: 1px solid #ffffff;">NGÀY KHỞI HÀNH</th>
+                                        <th style="width: 25%; vertical-align: middle; border: 1px solid #ffffff;">NGƯỜI LỚN</th>
+                                        <th style="width: 35%; vertical-align: middle; border: 1px solid #ffffff;">TRẺ EM<br><span style="font-size: 12px; font-weight: normal;">02 ĐẾN DƯỚI 10 TUỔI</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="background-color: #ffb703; color: #000000; font-weight: bold;">
+                                        <td style="text-align: left; vertical-align: middle; border: 1px solid #ffffff; padding-left: 15px;">KM - Tháng 11: 13,14</td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff;">19,990,000</td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff;">90% người lớn</td>
+                                    </tr>
+                                    <tr style="background-color: #ffb703; color: #000000; font-weight: bold;">
+                                        <td style="text-align: left; vertical-align: middle; border: 1px solid #ffffff; padding-left: 15px;">Tháng 11: 18,19,28 <br><span style="font-size: 12px; font-weight: normal;">(ko gồm thế giới băng tuyết)</span></td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff;">21,990,000</td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff;">90% người lớn</td>
+                                    </tr>
+                                    <tr style="background-color: #ffb703; color: #000000; font-weight: bold;">
+                                        <td style="text-align: left; vertical-align: middle; border: 1px solid #ffffff; padding-left: 15px;">Tháng 12: 2,3,11,12 <br><span style="font-size: 12px; font-weight: normal;">(ko gồm thế giới băng tuyết)</span></td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff;">23,990,000</td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff;">90% người lớn</td>
+                                    </tr>
+                                    <tr style="background-color: #ffb703; color: #000000; font-weight: bold;">
+                                        <td style="text-align: left; vertical-align: middle; border: 1px solid #ffffff; padding-left: 15px;">Tháng 12: 16, 17, 25, 26 <br><span style="font-size: 12px; font-weight: normal;">(gồm thế giới băng tuyết)</span></td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff;">25,990,000</td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff;">90% người lớn</td>
+                                    </tr>
+                                    <tr style="background-color: #ffb703; color: #000000; font-weight: bold;">
+                                        <td style="text-align: left; vertical-align: middle; border: 1px solid #ffffff; padding-left: 15px;">Tháng 1: 8, 9, 13,14, 22,23 <br><span style="font-size: 12px; font-weight: normal;">(gồm thế giới băng tuyết)</span></td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff;">25,990,000</td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff;">90% người lớn</td>
+                                    </tr>
+                                    <tr style="background-color: #ffb703; color: #000000; font-weight: bold;">
+                                        <td style="text-align: left; vertical-align: middle; border: 1px solid #ffffff; padding-left: 15px;">Tết Âm lịch: 10/2/2027 – mông 5 <br><span style="font-size: 12px; font-weight: normal;">(gồm thế giới băng tuyết)</span></td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff; color: #cc0000;">27,990,000</td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff;">90% người lớn</td>
+                                    </tr>
+                                    <tr style="background-color: #ffb703; color: #000000; font-weight: bold;">
+                                        <td style="text-align: left; vertical-align: middle; border: 1px solid #ffffff; padding-left: 15px;">THÁNG 02 : 19,20,24,25 <br><span style="font-size: 12px; font-weight: normal;">( ko gồm thế giới băng tuyết)</span></td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff;">23,990,000</td>
+                                        <td style="vertical-align: middle; border: 1px solid #ffffff;">90% người lớn</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <div class="included-section mb60">
                             <h3 class="mb30">Dịch vụ bao gồm</h3>
                             <div class="row">
