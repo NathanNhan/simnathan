@@ -78,10 +78,10 @@
 
                         </div>
                         <?php
-                        $table_price = get_field('extra_table_price', get_the_ID());
-                        $uses_extra_table_price = !empty($table_price) && is_array($table_price);
-                        if (!$uses_extra_table_price) {
-                            $table_price = get_field('table_price', get_the_ID());
+                        $table_price = get_field('table_price', get_the_ID());
+                        $uses_extra_table_price = empty($table_price) || !is_array($table_price);
+                        if ($uses_extra_table_price) {
+                            $table_price = get_field('extra_table_price', get_the_ID());
                         }
                         $extra_price = get_field('extra_price', get_the_ID());
                         if (!empty($table_price) && is_array($table_price)) :
