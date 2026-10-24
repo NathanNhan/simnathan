@@ -79,7 +79,7 @@
                         </div>
                         <div class="table-responsive">
                             <div style="text-align: right; color: #cc0000; font-weight: bold; font-size: 14px; margin-bottom: 5px;">
-                                DU LỊCH CÙNG HELLO CHINA
+                               BẢNG GIÁ TOUR (VNĐ)
                             </div>
                             <table class="table table-bordered text-center" style="border: 1px solid #4a90e2; vertical-align: middle;">
                                 <thead style="background-color: #5c93d8; color: #ffffff;">
