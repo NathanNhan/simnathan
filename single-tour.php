@@ -77,37 +77,48 @@
                             <?php endif; ?>
 
                         </div>
-                        <div class="table-responsive">
-                            <div style="text-align: right; color: #cc0000; font-weight: bold; font-size: 14px; margin-bottom: 5px;">
-                               BẢNG GIÁ TOUR (VNĐ)
-                            </div>
-                            <table class="table table-bordered text-center" style="border: 1px solid #4a90e2; vertical-align: middle;">
-                                <thead style="background-color: #5c93d8; color: #ffffff;">
-                                    <tr>
-                                        <th style="width: 40%; vertical-align: middle; border: 1px solid #ffffff;">NGÀY KHỞI HÀNH</th>
-                                        <th style="width: 25%; vertical-align: middle; border: 1px solid #ffffff;">NGƯỜI LỚN</th>
-                                        <th style="width: 35%; vertical-align: middle; border: 1px solid #ffffff;">TRẺ EM<br><span style="font-size: 12px; font-weight: normal;">02 ĐẾN DƯỚI 10 TUỔI</span></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $table_price = get_field('table_price');
-                                    if (!is_null($table_price)) :
-                                        foreach ($table_price as $row) :
-                                    ?>
+                        <?php
+                        $table_price = get_field('extra_table_price', get_the_ID());
+                        $uses_extra_table_price = !empty($table_price) && is_array($table_price);
+                        if (!$uses_extra_table_price) {
+                            $table_price = get_field('table_price', get_the_ID());
+                        }
+                        $extra_price = get_field('extra_price', get_the_ID());
+                        if (!empty($table_price) && is_array($table_price)) :
+                        ?>
+                            <div class="table-responsive">
+                                <div style="text-align: right; color: #cc0000; font-weight: bold; font-size: 14px; margin-bottom: 5px;">
+                                    BẢNG GIÁ TOUR (VNĐ)
+                                </div>
+                                <table class="table table-bordered text-center" style="border: 1px solid #4a90e2; vertical-align: middle;">
+                                    <thead style="background-color: #5c93d8; color: #ffffff;">
+                                        <tr>
+                                            <th style="width: 40%; vertical-align: middle; border: 1px solid #ffffff;">NGÀY KHỞI HÀNH</th>
+                                            <th style="width: 20%; vertical-align: middle; border: 1px solid #ffffff;">NGƯỜI LỚN<br><span style="font-size: 12px; font-weight: normal;">TỪ 11 TUỔI TRỞ LÊN</span></th>
+                                            <th style="width: 20%; vertical-align: middle; border: 1px solid #ffffff;">TRẺ EM<br><span style="font-size: 12px; font-weight: normal;">02 ĐẾN DƯỚI 10 TUỔI</span></th>
+                                            <th style="width: 20%; vertical-align: middle; border: 1px solid #ffffff;">TRẺ EM<br><span style="font-size: 12px; font-weight: normal;">TỪ 0 ĐẾN 2 TUỔI</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($table_price as $row) : ?>
                                             <tr style="background-color: #ffb703; color: #000000; font-weight: bold;">
-                                                <td style="text-align: left; vertical-align: middle; border: 1px solid #ffffff; padding-left: 15px;"><?= $row['departure_date_table']; ?></td>
-                                                <td style="vertical-align: middle; border: 1px solid #ffffff;"><?= $row['adult_price']; ?></td>
-                                                <td style="vertical-align: middle; border: 1px solid #ffffff;"><?= $row['child_price']; ?></td>
+                                                <td style="text-align: left; vertical-align: middle; border: 1px solid #ffffff; padding-left: 15px;"><?php echo esc_html($row['departure_date_table'] ?? ''); ?></td>
+                                                <td style="vertical-align: middle; border: 1px solid #ffffff;"><?php echo esc_html($row['adult_price'] ?? ''); ?></td>
+                                                <td style="vertical-align: middle; border: 1px solid #ffffff;"><?php echo esc_html($row[$uses_extra_table_price ? 'child_price_2_10' : 'child_price'] ?? ''); ?></td>
+                                                <td style="vertical-align: middle; border: 1px solid #ffffff;"><?php echo esc_html($row['infant_price_0_2'] ?? ''); ?></td>
                                             </tr>
-                                    <?php endforeach;
-                                    endif;
-
-                                    ?>
-
-                                </tbody>
-                            </table>
-                        </div>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php elseif ($extra_price !== '' && $extra_price !== null) : ?>
+                            <div class="table-responsive">
+                                <div style="text-align: right; color: #cc0000; font-weight: bold; font-size: 14px; margin-bottom: 5px;">
+                                    GIÁ TOUR (VNĐ)
+                                </div>
+                                <p><?php echo esc_html($extra_price); ?></p>
+                            </div>
+                        <?php endif; ?>
                         <div class="included-section mb60">
                             <h3 class="mb30">Dịch vụ bao gồm</h3>
                             <div class="row">
